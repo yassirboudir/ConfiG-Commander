@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About This Project</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="left-section">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+            <h1>About This Project</h1>
+        </div>
+        <div class="right-section">
+            <a href="{{ url_for('home') }}" class="home-button">Home</a>
+            <img src="{{ url_for('static', filename='images/lear.png') }}" alt="Lear Logo">
+        </div>
+    </header>
+    <div class="container">
+        <h2>What is this project?</h2>
+        <p>This project is a web-based application designed to automate the configuration of network switches through serial communication ports (COM ports). Users can select individual or multiple COM ports, upload configuration files, and send custom commands to these ports via an intuitive interface.</p>
+
+        <h2>The Purpose of This Project</h2>
+        <p>The primary purpose of this project is to streamline and automate the process of configuring network switches. This tool helps in quickly managing multiple devices, ensuring consistency, saving time, and reducing configuration errors in network management.</p>
+
+        <h2>The Maker of This Project</h2>
+        <p>This project was created by Yassir Boudir. The aim was to provide a user-friendly solution for network administrators and IT professionals to efficiently handle switch configurations.</p>
+    </div>
+    <div class="logout-container">
+        <a href="{{ url_for('logout') }}" class="logout-button">Logout</a>
+    </div>
+</body>
+</html>

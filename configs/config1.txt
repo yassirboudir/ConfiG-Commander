@@ -1,0 +1,22 @@
+enable
+conf t
+vlan 1
+name SSH
+exit
+interface range G1/0/1 - 10
+switchport mode access
+switchport access vlan 10
+exit
+interface vlan 10
+ip address <IP_ADDRESS> 255.255.0.0
+no sh
+exit
+hostname SWLAB
+crypto key generate rsa
+ip domain-name yassir.ma
+username yassir secret yassir123
+ip ssh version 2
+line vty 0 4
+transport input ssh
+login local
+end

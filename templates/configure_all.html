@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="utf-8">
+    <title>Configure All COMs</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <div class="left-section">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+            <h1>Configure All COMs</h1>
+        </div>
+        <div class="right-section">
+            <a href="{{ url_for('home') }}" class="home-button">Home</a>
+            <img src="{{ url_for('static', filename='images/lear.png') }}" alt="Lear Logo">
+        </div>
+    </header>
+    <div class="container">
+        <form method="post">
+            {% for port in com_ports %}
+            <div>
+                <h2>{{ port }}</h2>
+                <label for="config_file_{{ port }}">Configuration File:</label>
+                <select name="config_file_{{ port }}" id="config_file_{{ port }}" onchange="loadConfig(this.value, '{{ port }}')">
+                    <option value="">Select a configuration file</option>
+                    {% for file in config_files %}
+                    <option value="{{ file }}">{{ file }}</option>
+                    {% endfor %}
+                </select><br>
+                <label for="custom_commands_{{ port }}">Custom Commands:</label><br>
+                <textarea name="custom_commands_{{ port }}" id="custom_commands_{{ port }}" rows="10" cols="60">{{ config_content }}</textarea><br>
+            </div>
+            {% endfor %}
+            <button type="submit">Apply Configuration</button>
+        </form>
+        {% if output %}
+        <h2>Output</h2>
+        <pre>{{ output }}</pre>
+        {% endif %}
+    </div>
+    <script>
+    function loadConfig(filename, port) {
+        if (filename) {
+            fetch(`/edit_config/${filename}`)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById(`custom_commands_${port}`).value = data;
+                });
+        }
+    }
+    </script>
+    <div class="logout-container">
+        <a href="{{ url_for('logout') }}" class="logout-button">Logout</a>
+    </div>
+</body>
+</html>

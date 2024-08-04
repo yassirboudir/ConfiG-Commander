@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="utf-8">
+    <title>Configure {{ port }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <div class="left-section">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+            <h1>Configure {{ port }}</h1>
+        </div>
+        <div class="right-section">
+            <a href="{{ url_for('home') }}" class="home-button">Home</a>
+            <img src="{{ url_for('static', filename='images/lear.png') }}" alt="Lear Logo">
+        </div>
+    </header>
+    <div class="container">
+        <form method="post">
+            <label for="config_file">Configuration File:</label>
+            <select name="config_file" id="config_file" onchange="loadConfig(this.value)">
+                <option value="">Select a configuration file</option>
+                {% for file in config_files %}
+                <option value="{{ file }}">{{ file }}</option>
+                {% endfor %}
+            </select><br>
+            <label for="custom_commands">Custom Commands:</label><br>
+            <textarea name="custom_commands" id="custom_commands" rows="20" cols="80">{{ config_content }}</textarea><br>
+            <button type="submit">Apply Configuration</button>
+        </form>
+        {% if output %}
+        <h2>Output</h2>
+        <pre>{{ output }}</pre>
+        {% endif %}
+    </div>
+    <script>
+    function loadConfig(filename) {
+        if (filename) {
+            fetch(`/edit_config/${filename}`)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('custom_commands').value = data;
+                });
+        }
+    }
+    </script>
+    <div class="logout-container">
+        <a href="{{ url_for('logout') }}" class="logout-button">Logout</a>
+    </div>
+</body>
+</html>

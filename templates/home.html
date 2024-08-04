@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Config Commander</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="left-section">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+            <h1>ConfiG Commander</h1>
+        </div>
+        <div class="right-section">
+            <img src="{{ url_for('static', filename='images/lear.png') }}" alt="Lear Logo">
+        </div>
+    </header>
+    
+    <!-- Welcome message div -->
+    <div id="welcome-message" class="welcome-message" style="display: none;">
+        <p>Welcome, <span id="welcome-username"></span>!</p>
+        <button id="close-welcome">Close</button>
+    </div>
+
+    <div class="container">
+        <div class="com-sections">
+            <div class="com-section singular-com-container">
+                <h2>Singular COM</h2>
+                <div class="com-buttons">
+                    {% for port in com_ports %}
+                    <a href="{{ url_for('configure_port', port=port) }}"><button>{{ port }}</button></a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="com-section all-coms-container">
+                <h2>All COMs</h2>
+                <div class="com-buttons">
+                    <a href="{{ url_for('configure_all') }}"><button>Configure All</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <a href="{{ url_for('about') }}" class="about-button">About This Project</a>
+    </footer>
+    <div class="logout-container">
+        <a href="{{ url_for('logout') }}" class="logout-button">Logout</a>
+    </div>
+
+    <script>
+    $(document).ready(function() {
+        $.get('/check_welcome', function(data) {
+            if (data.show_welcome) {
+                $('#welcome-username').text(data.username);
+                $('#welcome-message').fadeIn();
+            }
+        });
+
+        $('#close-welcome').click(function() {
+            $('#welcome-message').fadeOut();
+        });
+    });
+    </script>
+</body>
+</html>

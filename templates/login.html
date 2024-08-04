@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - ConfiG Commander</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="left-section">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+            <h1>ConfiG Commander</h1>
+        </div>
+        <div class="right-section">
+            <img src="{{ url_for('static', filename='images/lear.png') }}" alt="Lear Logo">
+        </div>
+    </header>
+    <div class="container">
+        <div class="login-container">
+            <h2>Login</h2>
+            <form action="{{ url_for('login') }}" method="POST">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+    <footer>
+        <a href="{{ url_for('about') }}" class="about-button">About This Project</a>
+    </footer>
+</body>
+</html>
