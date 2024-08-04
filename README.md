@@ -1,6 +1,24 @@
-Just some stuff ive worked on in my period during an internship with lear the project is simple its a web-application that can automate switch configuration it has two options the option to configure each switch alone or all of the switches connected
-its uses a library named pyserial that connected through the switch using COM connection 
-also you synchronize it with ur AD users 
-to run the app simply type : 
-**python app.py**
-uh have fun with the app ig
+Switch Configuration Automation Web Application 
+
+This project is a web application developed during my internship at Lear. The application automates the configuration of network switches, offering two main functionalities:
+
+Configuring each switch individually.
+Configuring all connected switches simultaneously.
+Features : 
+
+Individual Switch Configuration: Configure each switch separately.
+Bulk Switch Configuration: Configure all connected switches at once.
+
+User Synchronization: Synchronize with Active Directory (AD) users.
+
+Technologies Used
+Python
+PySerial Library: Establishes a COM connection to communicate with the switches.
+
+Getting Started
+To run the application, use the following command:
+
+python app.py
+
+Have Fun!
+Enjoy using the application!
