@@ -7,7 +7,7 @@ body {
     background-image: url('../images/background.jpg');
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     color: #fff;
     margin: 0;
     padding: 0;
@@ -45,9 +45,9 @@ header .left-section img, header .right-section img {
 }
 
 header .left-section img {
-    height: 70px;
+    height: 50px;
     margin-right: 10px;
-    animation: bounce 2s ease-out forwards;
+    
 }
 
 header h1 {
@@ -264,8 +264,8 @@ pre {
     bottom: 20px;
     right: 20px;
 }
-/* Add these new styles to your existing styles.css file */
 
+/* Styles for COM sections (added) */
 .com-sections {
     display: flex;
     justify-content: space-between;
@@ -301,17 +301,15 @@ pre {
     width: 100%;
 }
 
-/* Update the existing .container style */
+/* Updated .container style */
 .container {
     padding: 20px;
     margin: 0 auto;
-    max-width: 1000px; /* Increased from 800px to accommodate the side-by-side layout */
+    max-width: 1000px; /* Increased from 800px */
     width: 100%;
 }
 
-/* You may need to adjust other existing styles to fit this new layout */
-/* Add these styles to your existing styles.css file */
-
+/* Welcome Message Styles */
 .welcome-message {
     position: fixed;
     top: 20px;
@@ -343,4 +341,55 @@ pre {
 
 .welcome-message button:hover {
     background-color: #f0f0f0;
+}
+
+/* Fluid Images */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Media Query for Responsiveness */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px; 
+    }
+
+    .container {
+        max-width: 90%; 
+        padding: 10px; 
+    }
+
+    .com-sections {
+        flex-direction: column; 
+    }
+
+    .com-section {
+        flex-basis: 100%; 
+        margin-bottom: 20px;
+    }
+
+    header {
+        padding: 10px 20px; /* Reduce header padding */
+    }
+
+    header h1 {
+        font-size: 24px; 
+    }
+
+    form {
+        max-width: 90%; /* Make form take up more of the screen width */
+        padding: 15px; /* Reduce form padding */
+    }
+
+    footer {
+        padding: 10px; /* Reduce footer padding */
+    }
+
+    .welcome-message {
+        top: 10px; /* Adjust position for smaller screens */
+        left: 10px;
+        transform: translateX(0); 
+        width: 90%; /* Make message wider */
+    }
 }
