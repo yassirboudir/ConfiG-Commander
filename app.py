@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
-from ldap3 import Server, Connection, ALL, NTLM
+from ldap3 import Server, Connection, ALL, NTLM, SUBTREE
 import os
 from flask import jsonify
 
@@ -21,22 +21,32 @@ def list_com_ports():
 
 def authenticate(username, password):
     local_users = load_local_users()
-    # Check for local user
     if username in local_users and local_users[username] == password:
         return True
-    elif username in local_users: 
-        # Username exists, but password is incorrect
-        flash('Invalid password') 
+    elif username in local_users:
+        flash('Invalid password')
     else:
-        # Check for AD user (only if not a local user)
+        # AD Authentication with OU check
         server = Server('your_ad_server', get_info=ALL)
         conn = Connection(server, user=f'your_domain\\{username}', password=password, authentication=NTLM)
-        if conn.bind():
-            return True
-        else:
-            flash('Invalid username or password')  # AD authentication failed
 
-    return False  
+        if conn.bind():
+            # Specify the OU to search within
+            ou_dn = 'OU=YourOUName,DC=yourdomain,DC=com'  # Replace with your actual OU DN
+
+            # Search for the user within the specified OU
+            search_filter = f'(&(objectClass=user)(sAMAccountName={username}))'
+            conn.search(ou_dn, search_filter, attributes=['memberOf'], search_scope=SUBTREE)
+
+            if len(conn.entries) > 0:
+                # User found in the OU, authentication successful
+                return True
+            else:
+                flash('User not found in the allowed OU.')
+        else:
+            flash('Invalid username or password')
+
+    return False
 
 @app.route('/')
 def home():
