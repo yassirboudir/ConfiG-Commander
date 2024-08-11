@@ -8,7 +8,7 @@ switchport mode access
 switchport access vlan 10
 exit
 interface vlan 10
-ip address <IP_ADDRESS> 255.255.0.0
+ip address 172.10.0.1 255.255.0.0
 no sh
 exit
 hostname SWLAB
