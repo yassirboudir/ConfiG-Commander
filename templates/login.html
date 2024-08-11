@@ -28,6 +28,15 @@
                 <input type="password" id="password" name="password" required>
                 
                 <button type="submit">Login</button>
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <ul class="flashes">
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}
             </form>
         </div>
     </div>

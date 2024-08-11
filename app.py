@@ -24,14 +24,19 @@ def authenticate(username, password):
     # Check for local user
     if username in local_users and local_users[username] == password:
         return True
-    
-    # Check for AD user
-    server = Server('your_ad_server', get_info=ALL)
-    conn = Connection(server, user=f'your_domain\\{username}', password=password, authentication=NTLM)
-    if conn.bind():
-        return True
-    
-    return False
+    elif username in local_users: 
+        # Username exists, but password is incorrect
+        flash('Invalid password') 
+    else:
+        # Check for AD user (only if not a local user)
+        server = Server('your_ad_server', get_info=ALL)
+        conn = Connection(server, user=f'your_domain\\{username}', password=password, authentication=NTLM)
+        if conn.bind():
+            return True
+        else:
+            flash('Invalid username or password')  # AD authentication failed
+
+    return False  
 
 @app.route('/')
 def home():
@@ -50,7 +55,7 @@ def login():
             session['show_welcome'] = True  
             return redirect(url_for('home'))
         else:
-            flash('Invalid username or password')
+            flash('Invalid Credentials')
     return render_template('login.html')
 @app.route('/check_welcome')
 def check_welcome():
