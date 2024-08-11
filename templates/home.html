@@ -50,18 +50,23 @@
     </div>
 
     <script>
-    $(document).ready(function() {
-        $.get('/check_welcome', function(data) {
-            if (data.show_welcome) {
-                $('#welcome-username').text(data.username);
-                $('#welcome-message').fadeIn();
-            }
-        });
+        $(document).ready(function() {
+            $.get('/check_welcome', function(data) {
+                if (data.show_welcome) {
+                    $('#welcome-username').text(data.username);
+                    $('#welcome-message').fadeIn();
 
-        $('#close-welcome').click(function() {
-            $('#welcome-message').fadeOut();
+                    // Automatically hide the welcome message after 2 seconds
+                    setTimeout(function() {
+                        $('#welcome-message').fadeOut();
+                    }, 2000); 
+                }
+            });
+
+            $('#close-welcome').click(function() {
+                $('#welcome-message').fadeOut();
+            });
         });
-    });
     </script>
 </body>
 </html>
