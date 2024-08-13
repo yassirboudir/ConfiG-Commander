@@ -6,6 +6,15 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <div class="social-icons">
+        <a href="https://linkedin.com/in/yassir-boudir-a7a1b0265/" target="_blank" class="social-icon">
+            <i class="fab fa-linkedin"></i> 
+        </a>
+        <a href="https://github.com/yassirboudir/" target="_blank" class="social-icon">
+            <i class="fab fa-github"></i> 
+        </a>
+      </div>
 </head>
 <body>
     <header>
@@ -48,6 +57,7 @@
     <div class="logout-container">
         <a href="{{ url_for('logout') }}" class="logout-button">Logout</a>
     </div>
+    
 
     <script>
         $(document).ready(function() {

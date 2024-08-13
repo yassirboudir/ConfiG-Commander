@@ -13,6 +13,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-bottom: 80px;
 }
 
 h1, h2 {
@@ -160,9 +161,10 @@ footer .about-button, footer .contact-button {
     color: #fff;
     padding: 10px 20px;
     border-radius: 5px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
     text-decoration: none;
     font-size: 16px;
-    transition: transform 0.3s ease, background-color 0.3s ease;
+    
     margin: 0 10px;
 }
 
@@ -179,6 +181,8 @@ footer .contact-button:hover {
     margin: 0 auto;
     max-width: 1000px;
     width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 textarea {
@@ -262,6 +266,8 @@ pre {
     flex-basis: 48%;
     background: rgba(51, 51, 51, 0.9);
     padding: 20px;
+    max-height: 200px;
+    overflow-y: auto;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
@@ -273,20 +279,57 @@ pre {
 
 .com-buttons {
     display: flex;
+    flex-wrap: wrap;
+    
+    justify-content: space-between;
+}
+
+.com-section.all-coms-container{
+    flex-basis: 35%;
+    display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .com-buttons a {
     margin-bottom: 10px;
-    width: 100%;
-    max-width: 200px;
+    flex-basis: calc(33.33% - 10px);
+    box-sizing: border-box;
 }
 
 .com-buttons button {
     width: 100%;
+    padding: 10px;
+    font-size: 16px;
 }
-
+.com-section.all-coms-container .com-buttons button { 
+    width: 150%; 
+    padding: 20px; 
+    font-size: 16px;
+    align-items: center;
+    
+}
+.com-section.singular-com-container {
+    
+    overflow-y: scroll;
+}
+.com-section.singular-com-container::-webkit-scrollbar {
+    width: 10px; /
+}
+.com-section.singular-com-container::-webkit-scrollbar-track {
+    background: #333;
+}
+.com-section.singular-com-container::-webkit-scrollbar-thumb {
+    background: #e60000; 
+    border-radius: 5px; 
+}
+.com-section.singular-com-container::-webkit-scrollbar-thumb:hover {
+    background: #cc0000;
+}
+.com-section.singular-com-container {
+    scrollbar-width: thin; 
+    scrollbar-color: #e60000 #333; 
+}
 .container {
     padding: 20px;
     margin: 0 auto;
@@ -388,3 +431,20 @@ img {
         margin-bottom: 5px;
     }
 }
+.social-icon {
+    display: inline-block;
+    margin: 0 10px; /* Adjust spacing as needed */
+    font-size: 24px; /* Adjust icon size as needed */
+    color: #fff;  /* Default icon color */
+    transition: color 0.3s ease; /* Smooth color transition on hover */
+}
+
+.social-icon:hover {
+    color: #e60000; /* Change color on hover */
+}
+.social-icons {
+    position: fixed;  
+    bottom: 20px;      
+    left: 20px;       
+    display: flex;     
+  }
