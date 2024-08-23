@@ -27,12 +27,12 @@ def authenticate(username, password):
         flash('Invalid password')
     else:
         # AD Authentication with OU check
-        server = Server('your_ad_server', get_info=ALL)
-        conn = Connection(server, user=f'your_domain\\{username}', password=password, authentication=NTLM)
+        server = Server('Dc.Lear.ma', get_info=ALL)
+        conn = Connection(server, user=f'Lear\\{username}', password=password, authentication=NTLM)
 
         if conn.bind():
-            # Specify the OU to search within
-            ou_dn = 'OU=YourOUName,DC=yourdomain,DC=com'  # Replace with your actual OU DN
+            # Specify the OU rtementsto search within
+            ou_dn = 'OU=Departements,DC=Lear,DC=ma'  # Replace with your actual OU DN
 
             # Search for the user within the specified OU
             search_filter = f'(&(objectClass=user)(sAMAccountName={username}))'
